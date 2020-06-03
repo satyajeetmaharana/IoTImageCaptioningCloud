@@ -1,0 +1,58 @@
+1. Create a Registry
+2. Create a Device
+3. Create a subscription
+
+gcloud pubsub subscriptions create \
+    projects/cloud-computing-project-276602/subscriptions/my-subscription \
+    --topic=projects/cloud-computing-project-276602/topics/my-device-events
+
+
+
+Created subscription [projects/cloud-computing-project-276602/subscriptions/my-subscription].
+
+
+
+
+4. Start the server
+
+my-subscription
+
+
+python server.py \
+    --project_id=cloud-computing-project-276602 \
+    --pubsub_subscription=my-subscription \
+    --service_account_json=service_account.json
+
+
+python cloudiot_pubsub_example_server.py \
+    --project_id=cloud-computing-project-276602 \
+    --pubsub_subscription=my-subscription \
+    --service_account_json=service_account.json
+
+
+gcloud pubsub subscriptions pull --auto-ack projects/cloud-computing-project-276602/subscriptions/my-subscription --limit=1000
+
+ 5. Start sending images
+
+ python device.py \
+    --project_id=cloud-computing-project-276602 \
+    --registry_id=my-registry \
+    --device_id=my-device \
+    --private_key_file=rsa_private.pem \
+    --algorithm=RS256 \
+    --cloud_region=us-central1
+
+
+
+ gcloud pubsub subscriptions pull --auto-ack \
+    projects/cloud-computing-project-276602/subscriptions/my-subscription
+
+
+
+    python cloudiot_pubsub_example_mqtt_device.py \
+      --project_id=cloud-computing-project-276602 \
+      --registry_id=my-registry \
+      --device_id=my-device \
+      --private_key_file=rsa_private.pem \
+      --algorithm=RS256 \
+      --cloud_region=us-central1
