@@ -9,8 +9,8 @@ def authenticate(addr, cred):
     with open('paymentABI.json') as f:
         paymentabi = json.load(f)
 
-    w3 = Web3(Web3.WebsocketProvider("https://ropsten.infura.io/v3/f9c889d036ce422c83e4008f0e8186e5"))
-    unicorns = w3.eth.contract(address="0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359", abi=paymentabi)
+    w3 = Web3(Web3.WebsocketProvider("https://ropsten.infura.io/v3/f9c889dXXXXXXXXXXX186e5"))
+    unicorns = w3.eth.contract(address="0xfB6916095XXXXXXXXX74c37c5d359", abi=paymentabi)
 
     nonce = w3.eth.getTransactionCount(addr) 
     # user account  
